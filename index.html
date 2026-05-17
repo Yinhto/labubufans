@@ -181,8 +181,8 @@ img{max-width:100%;display:block;}
 @media(min-width:640px){.picker-section p{font-size:0.95rem;}}
 .picker-row{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;}
 
-.pick-color{width:44px !important;height:44px !important;}
-.pick-item{width:52px !important;height:52px !important;}
+.pick-color{width:34px !important;height:34px !important;}
+.pick-item{width:42px !important;height:42px !important;}
 @media(min-width:640px){.pick-color{width:56px !important;height:56px !important;}.pick-item{width:68px !important;height:68px !important;}}
 @media(min-width:768px){.pick-color{width:58px !important;height:58px !important;}.pick-item{width:72px !important;height:72px !important;}}
 
@@ -436,31 +436,49 @@ document.addEventListener('DOMContentLoaded',initCountdown);
     <h2 class="section-title grad-rainbow">LABUBU FIFA GENERATOR 2026</h2>
     <p style="color:#ff69b4;font-size:clamp(0.9rem,3vw,1.2rem);margin-bottom:2.5rem;">Choose your Labubu + Cap + Jersey + Accessories ⚽🧸</p>
 
-    <div id="preview-container">
-      <img id="labubu-body" src="labubu-red.png" alt="Labubu body" style="top:10%;left:15%;width:72%;z-index:1;">
-      <img id="jersey"      src="jersey_spain.png" alt="Jersey"    style="top:54%;left:24%;width:53%;z-index:2;">
-      <img id="cap"         src="cap.png" alt="Cap"                style="top:1%;left:25%;width:50%;z-index:3;transition:all .4s;">
-      <img id="crown"       src="crown.png" alt="Crown"            style="top:3%;left:23%;width:53%;z-index:3;display:none;transition:all .4s;">
-      <img id="sunglasses"  src="w1dgG.png" alt="Sunglasses"       style="top:31%;left:34%;width:33%;z-index:4;">
-      <img id="trophy"      src="trophy.png" alt="Trophy"          style="top:53%;left:62%;width:25%;transform:rotate(15deg);z-index:5;">
-      <img id="ball"        src="ball.png" alt="Ball"              style="top:75%;left:65%;width:23%;z-index:5;">
-      <img id="coca"        src="coca.png" alt="Coca"              style="top:62%;left:19%;width:17%;transform:rotate(-15deg);z-index:5;display:none;">
-      <img id="pill"        src="Pump-Fun-Logo.png" alt="Pump.fun" style="top:55%;left:15%;width:17%;z-index:5;display:none;">
-    </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:0;margin-bottom:3rem;">
+      <div id="preview-container">
+        <img id="labubu-body" src="labubu-red.png" alt="Labubu body" style="top:10%;left:15%;width:72%;z-index:1;">
+        <img id="jersey"      src="jersey_spain.png" alt="Jersey"    style="top:54%;left:24%;width:53%;z-index:2;">
+        <img id="cap"         src="cap.png" alt="Cap"                style="top:1%;left:25%;width:50%;z-index:3;transition:all .4s;">
+        <img id="crown"       src="crown.png" alt="Crown"            style="top:3%;left:23%;width:53%;z-index:3;display:none;transition:all .4s;">
+        <img id="sunglasses"  src="w1dgG.png" alt="Sunglasses"       style="top:31%;left:34%;width:33%;z-index:4;">
+        <img id="trophy"      src="trophy.png" alt="Trophy"          style="top:53%;left:62%;width:25%;transform:rotate(15deg);z-index:5;">
+        <img id="ball"        src="ball.png" alt="Ball"              style="top:75%;left:65%;width:23%;z-index:5;">
+        <img id="coca"        src="coca.png" alt="Coca"              style="top:62%;left:19%;width:17%;transform:rotate(-15deg);z-index:5;display:none;">
+        <img id="pill"        src="Pump-Fun-Logo.png" alt="Pump.fun" style="top:55%;left:15%;width:17%;z-index:5;display:none;">
+      </div>
 
-    <div class="pickers-grid">
-      <div class="picker-section"><p>🧸 Labubu Color</p><div id="color-picker" class="picker-row"></div></div>
-      <div class="picker-section"><p>🧢 Cap / Crown</p><div id="cap-picker" class="picker-row"></div></div>
-      <div class="picker-section"><p>👕 Jersey</p><div id="jersey-picker" class="picker-row"></div></div>
-      <div class="picker-section"><p>🎁 Accessories</p><div id="accessories-picker" class="picker-row"></div></div>
-    </div>
+      <div style="padding:1.4rem 0 0;display:flex;gap:12px;justify-content:center;flex-wrap:wrap;width:50%;margin:0 auto 2rem;">
+        <button onclick="randomizeLabubu()" class="btn btn-purple" style="font-size:0.9rem;padding:11px 22px;flex:1;min-width:100px;">🎲 Randomize</button>
+        <button onclick="downloadCurrent()" class="btn btn-pink"   style="font-size:0.9rem;padding:11px 22px;flex:1;min-width:100px;">⬇️ Download</button>
+        <button onclick="postOnX()"         class="btn btn-ghost"  style="font-size:0.9rem;padding:11px 22px;flex:1;min-width:100px;">𝕏 Post</button>
+      </div>
 
-    <div class="gen-btns">
-      <button onclick="randomizeLabubu()" class="btn btn-purple">🎲 Randomizer</button>
-      <button onclick="downloadCurrent()" class="btn btn-pink">⬇️ Download PNG</button>
-      <button onclick="postOnX()"         class="btn btn-ghost">𝕏 Post on X</button>
+      <div style="max-width:900px;margin:0 auto;display:flex;flex-direction:column;gap:2rem;">
+
+        <!-- Ligne 1 : Color + Cap + Jersey -->
+        <div style="display:flex;flex-direction:column;gap:1.5rem;">
+          <div class="picker-section">
+            <p style="color:#aaa;margin-bottom:10px;font-size:0.82rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;">🧸 Color</p>
+            <div id="color-picker"       class="picker-row" style="flex-wrap:wrap;justify-content:center;max-width:calc(8 * (44px + 8px));margin:0 auto;padding-bottom:6px;"></div>
+          </div>
+          <div class="picker-section">
+            <p style="color:#aaa;margin-bottom:10px;font-size:0.82rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;">🧢 Cap</p>
+            <div id="cap-picker"         class="picker-row" style="flex-wrap:wrap;justify-content:center;max-width:calc(8 * (52px + 8px));margin:0 auto;padding-bottom:6px;"></div>
+          </div>
+          <div class="picker-section">
+            <p style="color:#aaa;margin-bottom:10px;font-size:0.82rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;">👕 Jersey</p>
+            <div id="jersey-picker"      class="picker-row" style="flex-wrap:wrap;justify-content:center;max-width:calc(8 * (52px + 8px));margin:0 auto;padding-bottom:6px;"></div>
+          </div>
+          <div class="picker-section">
+            <p style="color:#aaa;margin-bottom:12px;font-size:0.82rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;">🎁 Accessories</p>
+            <div id="accessories-picker" class="picker-row" style="flex-wrap:wrap;justify-content:center;max-width:calc(8 * (52px + 8px));margin:0 auto;padding-bottom:6px;"></div>
+          </div>
+        </div>
+      </div>
+
     </div>
-  </div>
 </section>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" defer></script>
