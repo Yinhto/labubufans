@@ -529,9 +529,9 @@ async function downloadCurrent(){
   const c=document.getElementById('preview-container');if(!c)return;
   try{const cv=await html2canvas(c,{scale:3,useCORS:true,backgroundColor:'#111'});cv.toBlob(blob=>{const u=URL.createObjectURL(blob),a=document.createElement('a');a.href=u;a.download=`labubu-fifa-${currentColor}.png`;a.click();URL.revokeObjectURL(u);showToast('✅ FIFA Card downloaded!');},'image/png');}catch(e){console.error(e);}
 }
-async function postOnX(){
-  await downloadCurrent();
-  window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent('My custom Labubu for FIFA World Cup 2026 is ready! 🔥 $LABUBU on Solana 🧸 #LABUBU')}`,'_blank');
+async function postOnX() {
+  const text = 'My custom Labubu for FIFA World Cup 2026 is ready! 🔥 $LABUBU on Solana 🧸 #LABUBU';
+  window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`, '_blank');
 }
 document.addEventListener('DOMContentLoaded',()=>{createColorPicker();createCapPicker();createJerseyPicker();createAccessoriesPicker();});
 </script>
