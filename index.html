@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>LabubuFans – $LABUBU | The Cutest Monster on Solana 🧸⚽</title>
+<meta name="description" content="LabubuFans – Official fan hub for $LABUBU memecoin on Solana. FIFA Generator, Image Lab, Leaderboard, WC2026 Predictions!"/>
+
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>tailwind.config={theme:{extend:{fontFamily:{display:['Fredoka One','cursive'],body:['Nunito','sans-serif']}}}};</script>
+
+<style>
+/* ══ VARIABLES ══ */
+:root{
+  --pink-deep:#FF1493;--pink-mid:#FF69B4;--purple:#A855F7;
+  --gold:#F59E0B;--green:#10B981;--bg:#FFF0F8;
+  --glass:rgba(255,255,255,0.85);--glass-strong:rgba(255,255,255,0.92);
+  --glass-border:rgba(255,105,180,0.25);
+  --bounce:cubic-bezier(0.34,1.56,0.64,1);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Nunito',sans-serif;background:var(--bg);color:#222;overflow-x:hidden;}
+img{max-width:100%;display:block;}
+
+/* ══ GLASS ══ */
+.glass{background:var(--glass);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border:1.5px solid var(--glass-border);box-shadow:0 8px 32px rgba(255,20,147,0.12);}
+.glass-strong{background:var(--glass-strong);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border:2px solid var(--glass-border);box-shadow:0 8px 32px rgba(255,20,147,0.12);}
+
+/* ══ GRADIENT TEXT ══ */
+.grad-rainbow{background:linear-gradient(90deg,#FF1493,#FF69B4,#FF8C42,#FFD700,#4ADE80,#00D2FF,#A855F7);background-size:300%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:rainbow 6s linear infinite;}
+@keyframes rainbow{to{background-position:300%;}}
+
+/* ══ FLOATERS ══ */
+.bg-floater{position:absolute;pointer-events:none;z-index:0;animation:floatUp linear infinite;opacity:0.13;user-select:none;}
+@keyframes floatUp{0%{transform:translateY(105vh) rotate(0deg);opacity:0;}5%{opacity:0.13;}95%{opacity:0.13;}100%{transform:translateY(-10vh) rotate(540deg);opacity:0;}}
+
+/* ══ BUTTONS — mobile-first ══ */
+.btn{
+  font-family:'Fredoka One',cursive;font-size:1rem;padding:13px 24px;
+  border-radius:9999px;border:3px solid transparent;cursor:pointer;
+  transition:transform .3s var(--bounce),box-shadow .3s ease;
+  text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  font-weight:500;white-space:nowrap;-webkit-tap-highlight-color:transparent;
+}
+.btn:active{transform:scale(0.97);}
+@media(hover:hover){.btn:hover{transform:scale(1.06) translateY(-3px);}}
+@media(min-width:640px){.btn{font-size:1.15rem;padding:15px 32px;}}
+
+.btn-primary{background:linear-gradient(135deg,var(--pink-deep),var(--pink-mid));color:#fff;box-shadow:0 8px 25px rgba(255,20,147,0.4);}
+.btn-pink{background:linear-gradient(135deg,#FF1493,#FF69B4);border-color:rgba(255,255,255,0.6);color:#fff;box-shadow:0 8px 20px rgba(0,0,0,0.2);}
+.btn-purple{background:linear-gradient(135deg,#A855F7,#7C3AED);border-color:rgba(255,255,255,0.5);color:#fff;box-shadow:0 8px 20px rgba(0,0,0,0.2);}
+.btn-outline{background:transparent;border-color:var(--pink-deep);color:var(--pink-deep);}
+.btn-ghost{background:transparent;border-color:rgba(255,255,255,0.4);color:rgba(255,255,255,0.9);}
+.btn-hero{background:linear-gradient(135deg,rgba(168,85,247,0.1),rgba(255,255,255,0.95));border:3px solid var(--purple);color:var(--purple);}
+
+/* ══ NAVBAR ══ */
+#navbar{position:sticky;top:0;z-index:999;background:rgba(255,255,255,0.96);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-bottom:2px solid rgba(255,105,180,0.2);box-shadow:0 4px 20px rgba(255,20,147,0.08);}
+.nav-inner{max-width:1420px;margin:0 auto;padding:0 1rem;height:62px;display:flex;align-items:center;justify-content:space-between;gap:8px;}
+@media(min-width:768px){.nav-inner{height:78px;padding:0 1.5rem;}}
+
+.nav-logo-img{width:40px;height:40px;border-radius:50%;border:3px solid #fff;box-shadow:0 0 16px rgba(255,20,147,0.45);flex-shrink:0;}
+@media(min-width:768px){.nav-logo-img{width:52px;height:52px;}}
+.nav-logo-name{font-family:'Fredoka One',cursive;font-size:1.3rem;color:var(--pink-deep);line-height:1;}
+@media(min-width:768px){.nav-logo-name{font-size:1.75rem;}}
+.nav-logo-sub{font-size:0.6rem;color:#999;font-weight:700;}
+@media(min-width:768px){.nav-logo-sub{font-size:0.72rem;}}
+
+.nav-desktop{display:none;align-items:center;gap:4px;}
+@media(min-width:768px){.nav-desktop{display:flex;}}
+.nav-link{padding:8px 14px;border-radius:12px;color:#555;font-weight:700;font-size:0.9rem;text-decoration:none;transition:background .2s,color .2s;}
+.nav-link:hover{background:rgba(255,20,147,0.08);color:var(--pink-deep);}
+
+.nav-actions{display:flex;align-items:center;gap:8px;}
+.nav-social{display:none;}
+@media(min-width:500px){.nav-social{display:flex;align-items:center;gap:6px;}}
+.nav-social img{width:34px;height:34px;object-fit:contain;}
+@media(min-width:768px){.nav-social img{width:44px;height:44px;}}
+
+.nav-buy{padding:9px 16px;font-size:0.85rem;}
+@media(min-width:768px){.nav-buy{padding:12px 24px;font-size:1rem;}}
+
+.hamburger{display:flex;flex-direction:column;gap:5px;width:36px;background:rgba(255,20,147,0.08);border:1.5px solid rgba(255,105,180,0.25);border-radius:10px;padding:8px 7px;cursor:pointer;-webkit-tap-highlight-color:transparent;}
+@media(min-width:768px){.hamburger{display:none;}}
+.hamburger span{display:block;height:2px;background:#ec4899;border-radius:2px;transition:all .3s;}
+
+#mobile-menu{display:none;flex-direction:column;background:rgba(255,255,255,0.99);border-bottom:2px solid rgba(255,105,180,0.15);padding:0.8rem 1rem 1.2rem;gap:4px;}
+#mobile-menu.open{display:flex;}
+#mobile-menu a{padding:12px 16px;border-radius:14px;color:#444;font-weight:700;text-decoration:none;font-size:1.05rem;transition:background .2s,color .2s;display:flex;align-items:center;gap:8px;}
+#mobile-menu a:active,#mobile-menu a:focus{background:rgba(255,20,147,0.08);color:var(--pink-deep);}
+.menu-socials{display:flex;gap:14px;padding:10px 16px 4px;}
+.menu-socials a{display:flex;align-items:center;gap:6px;font-weight:700;font-size:0.9rem;color:var(--pink-deep);text-decoration:none;}
+.menu-socials img{width:28px;height:28px;object-fit:contain;}
+
+/* ══ TICKER ══ */
+#ticker{background:linear-gradient(90deg,#FF1493,#A855F7,#FF69B4);color:#fff;padding:9px 0;overflow:hidden;font-size:0.75rem;font-weight:700;white-space:nowrap;}
+@media(min-width:640px){#ticker{font-size:0.85rem;}}
+.ticker-track{display:inline-block;animation:ticker 35s linear infinite;}
+@keyframes ticker{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+
+/* ══ HERO ══ */
+#hero{min-height:100svh;display:flex;align-items:center;position:relative;background:linear-gradient(180deg,#FFF0F8 0%,#F8E1FF 100%);overflow:hidden;padding:5.5rem 1.25rem 3rem;}
+@media(min-width:900px){#hero{padding-top:80px;}}
+
+.hero-inner{max-width:900px;margin:0 auto;width:100%;display:flex;flex-direction:column;align-items:center;text-align:center;position:relative;z-index:10;}
+
+/* hero image only on wide screens */
+.hero-img-wrap{display:none;}
+@media(min-width:1000px){
+  .hero-img-wrap{display:block;position:absolute;top:50%;right:2%;transform:translateY(-50%);width:320px;pointer-events:none;z-index:1;}
+}
+.hero-img-circle{width:100%;aspect-ratio:1;border-radius:50%;background:#fff;box-shadow:0 25px 55px rgba(255,20,147,0.35);display:flex;align-items:center;justify-content:center;overflow:hidden;border:6px solid #fff;}
+.hero-img-circle img{width:118%;height:118%;object-fit:contain;}
+.hero-tag{position:absolute;font-family:'Fredoka One',cursive;font-size:0.85rem;padding:7px 15px;border-radius:9999px;z-index:3;}
+
+.hero-badge{display:inline-block;background:rgba(255,20,147,0.1);color:var(--pink-deep);border:1px solid rgba(255,20,147,0.3);padding:7px 16px;border-radius:9999px;font-size:0.8rem;font-weight:700;margin-bottom:1.4rem;}
+@media(min-width:640px){.hero-badge{font-size:0.9rem;margin-bottom:2rem;}}
+
+.hero-h1{font-family:'Fredoka One',cursive;font-size:clamp(2.4rem,10vw,6.2rem);line-height:1.05;margin-bottom:0.8rem;}
+.hero-sub{font-size:clamp(0.95rem,3vw,1.3rem);color:#444;max-width:560px;margin:0 auto 1.6rem;font-weight:600;}
+
+/* stats */
+.hero-stats{display:flex;flex-wrap:wrap;justify-content:center;gap:0.8rem;margin-bottom:1.8rem;width:100%;}
+@media(min-width:640px){.hero-stats{gap:1.2rem;margin-bottom:2.5rem;}}
+.stat-card{padding:0.85rem 1.2rem;border-radius:18px;text-align:center;min-width:95px;flex:1;max-width:130px;}
+@media(min-width:640px){.stat-card{padding:1.1rem 1.8rem;border-radius:22px;max-width:150px;}}
+.stat-icon{font-size:1.6rem;margin-bottom:3px;}
+@media(min-width:640px){.stat-icon{font-size:2.2rem;}}
+.stat-value{font-family:'Fredoka One',cursive;font-size:1.5rem;}
+@media(min-width:640px){.stat-value{font-size:2rem;}}
+.stat-label{font-size:0.65rem;color:#666;font-weight:700;letter-spacing:0.5px;}
+@media(min-width:640px){.stat-label{font-size:0.78rem;}}
+
+/* CTA buttons */
+.hero-ctas{display:flex;flex-direction:column;gap:12px;width:100%;max-width:360px;margin:0 auto 1.8rem;}
+@media(min-width:480px){.hero-ctas{flex-direction:row;flex-wrap:wrap;justify-content:center;max-width:none;width:auto;gap:14px;}}
+.hero-ctas .btn{width:100%;}
+@media(min-width:480px){.hero-ctas .btn{width:auto;}}
+
+/* countdown */
+.countdown-wrap{margin-bottom:1.8rem;width:100%;}
+.countdown-label{font-family:'Fredoka One',cursive;font-size:0.8rem;color:var(--pink-deep);letter-spacing:1px;margin-bottom:0.9rem;}
+@media(min-width:640px){.countdown-label{font-size:0.95rem;}}
+.countdown-row{display:flex;justify-content:center;gap:0.6rem;flex-wrap:wrap;}
+@media(min-width:480px){.countdown-row{gap:0.9rem;}}
+.cd-card{flex:1;min-width:65px;max-width:90px;padding:0.75rem 0.6rem;border-radius:16px;text-align:center;}
+@media(min-width:480px){.cd-card{min-width:80px;max-width:108px;padding:1rem 1.1rem;border-radius:20px;}}
+@media(min-width:640px){.cd-card{min-width:100px;max-width:120px;padding:1.1rem 1.4rem;border-radius:24px;}}
+.cd-num{font-size:1.65rem;font-weight:900;line-height:1;}
+@media(min-width:480px){.cd-num{font-size:2.1rem;}}
+@media(min-width:640px){.cd-num{font-size:2.7rem;}}
+.cd-lbl{font-size:0.6rem;font-weight:700;margin-top:4px;}
+@media(min-width:480px){.cd-lbl{font-size:0.7rem;}}
+
+/* CA box */
+.ca-box{display:flex;align-items:center;gap:.6rem;padding:.85rem 1.1rem;border-radius:16px;cursor:pointer;max-width:520px;width:100%;margin:0 auto;transition:all .3s;}
+@media(min-width:640px){.ca-box{padding:1rem 1.8rem;border-radius:20px;}}
+.ca-addr{font-family:monospace;font-size:0.65rem;color:var(--pink-deep);flex:1;text-align:center;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+@media(min-width:480px){.ca-addr{font-size:0.78rem;}}
+@media(min-width:640px){.ca-addr{font-size:0.92rem;}}
+
+/* ══ FIFA GENERATOR ══ */
+#generator{padding:4rem 1.25rem;background:linear-gradient(180deg,#0a0a0a,#6d08cc);position:relative;overflow:hidden;}
+@media(min-width:768px){#generator{padding:7rem 1.5rem;}}
+.gen-deco{display:none;}
+@media(min-width:1100px){.gen-deco{display:block;}}
+.gen-inner{max-width:1100px;margin:0 auto;text-align:center;position:relative;z-index:2;}
+
+#preview-container{position:relative;width:min(320px,88vw);height:min(395px,109vw);margin:0 auto 2rem;background:#111;border-radius:20px;overflow:hidden;box-shadow:0 20px 50px rgba(0,0,0,0.8);}
+@media(min-width:480px){#preview-container{width:400px;height:490px;border-radius:24px;}}
+@media(min-width:640px){#preview-container{width:460px;height:565px;}}
+@media(min-width:768px){#preview-container{width:520px;height:640px;border-radius:28px;}}
+#preview-container img{position:absolute;}
+
+.pickers-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;max-width:1100px;margin:0 auto;}
+@media(min-width:768px){.pickers-grid{grid-template-columns:repeat(4,1fr);gap:2rem;}}
+.picker-section p{color:#aaa;margin-bottom:10px;font-size:0.82rem;}
+@media(min-width:640px){.picker-section p{font-size:0.95rem;}}
+.picker-row{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;}
+
+.pick-color{width:44px !important;height:44px !important;}
+.pick-item{width:52px !important;height:52px !important;}
+@media(min-width:640px){.pick-color{width:56px !important;height:56px !important;}.pick-item{width:68px !important;height:68px !important;}}
+@media(min-width:768px){.pick-color{width:58px !important;height:58px !important;}.pick-item{width:72px !important;height:72px !important;}}
+
+.gen-btns{margin-top:2rem;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
+.gen-btns .btn{font-size:0.88rem;padding:11px 20px;}
+@media(min-width:640px){.gen-btns .btn{font-size:1.05rem;padding:13px 28px;}}
+
+/* ══ VOTE WC ══ */
+#votewc{padding:4rem 1.25rem;background:linear-gradient(135deg,#1a0033,#0a0a0a);color:#fff;position:relative;}
+@media(min-width:768px){#votewc{padding:7.5rem 1.5rem;}}
+
+#matches-grid{display:grid;grid-template-columns:1fr;gap:1.2rem;}
+@media(min-width:540px){#matches-grid{grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.8rem;}}
+
+.match-card{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-radius:22px;padding:1.5rem 1.3rem;transition:transform .4s var(--bounce),box-shadow .4s ease;position:relative;}
+@media(min-width:640px){.match-card{border-radius:28px;padding:2.2rem 1.8rem;}}
+@media(hover:hover){.match-card:hover{transform:translateY(-8px);box-shadow:0 20px 50px rgba(168,85,247,0.25);}}
+.match-card.voted{border-color:#4ADE80;box-shadow:0 0 0 2px rgba(74,222,128,0.25);}
+.vote-btn{padding:0.85rem 0.6rem;border-radius:14px;font-weight:700;cursor:pointer;transition:all .3s;width:100%;font-size:0.88rem;-webkit-tap-highlight-color:transparent;}
+@media(min-width:640px){.vote-btn{padding:1.1rem 0.8rem;font-size:1rem;}}
+
+/* ══ NEWS ══ */
+#news{padding:4rem 1.25rem;background:linear-gradient(180deg,#f0d4ff,#fff0f8);position:relative;overflow:hidden;}
+@media(min-width:768px){#news{padding:7.5rem 1.5rem;}}
+
+.news-card{width:270px;min-width:270px;height:410px;background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 10px 30px rgba(168,85,247,0.15);flex-shrink:0;display:flex;flex-direction:column;transition:transform .4s ease,box-shadow .4s ease;}
+@media(min-width:480px){.news-card{width:300px;min-width:300px;height:430px;}}
+@media(min-width:768px){.news-card{width:340px;min-width:340px;height:460px;border-radius:24px;}}
+@media(hover:hover){.news-card:hover{transform:translateY(-10px);box-shadow:0 20px 45px rgba(255,20,147,0.25);}}
+.card-img{height:170px;object-fit:cover;width:100%;}
+@media(min-width:768px){.card-img{height:210px;}}
+.card-body{padding:1rem 1.1rem;flex:1;display:flex;flex-direction:column;}
+.card-meta{display:flex;align-items:center;gap:9px;margin-bottom:9px;}
+.card-avatar{width:32px;height:32px;border-radius:50%;object-fit:cover;border:2px solid var(--pink-deep);flex-shrink:0;}
+@media(min-width:768px){.card-avatar{width:38px;height:38px;}}
+.card-user{font-family:'Fredoka One',cursive;font-size:0.92rem;color:#1f1f3d;}
+.card-platform{font-size:0.7rem;color:#aaa;}
+.card-text{font-size:0.82rem;line-height:1.5;color:#333;flex:1;margin:6px 0 10px;}
+.card-link{color:var(--pink-deep);font-weight:700;text-decoration:none;margin-top:auto;display:inline-flex;align-items:center;gap:4px;font-size:0.85rem;}
+
+/* ══ HOW TO BUY ══ */
+.htb-section{padding:4.5rem 1.25rem;background:linear-gradient(180deg,#fff0f8,#f0d4ff);position:relative;overflow:hidden;}
+@media(min-width:768px){.htb-section{padding:8rem 1.5rem;}}
+.htb-inner{max-width:1100px;margin:0 auto;text-align:center;position:relative;z-index:2;}
+.htb-subtitle{font-size:1.05rem;color:#444;max-width:680px;margin:0 auto 2.5rem;font-weight:600;}
+@media(min-width:640px){.htb-subtitle{font-size:1.25rem;margin-bottom:4rem;}}
+@media(min-width:768px){.htb-subtitle{font-size:1.32rem;margin-bottom:5rem;}}
+
+.htb-grid{display:grid;grid-template-columns:1fr;gap:2.8rem;max-width:1080px;margin:0 auto;align-items:stretch;}
+@media(min-width:560px){.htb-grid{grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:2.4rem;}}
+
+.step-card{background:rgba(255,255,255,0.65);border:1px solid rgba(255,20,147,0.13);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-radius:26px;padding:2.5rem 1.8rem 2rem;text-align:left;position:relative;display:flex;flex-direction:column;height:100%;transition:transform .4s var(--bounce),box-shadow .4s ease;}
+@media(min-width:640px){.step-card{border-radius:32px;padding:2.8rem 2.2rem 2.4rem;}}
+@media(hover:hover){.step-card:hover{transform:translateY(-8px) scale(1.02);box-shadow:0 24px 56px rgba(255,20,147,0.18);}}
+.step-badge{position:absolute;top:-22px;left:28px;background:linear-gradient(135deg,var(--pink-deep),var(--pink-mid));color:#fff;width:50px;height:50px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.7rem;font-weight:900;box-shadow:0 10px 30px rgba(255,20,147,0.45);}
+.step-icon{font-size:1.9rem;margin-bottom:0.5rem;}
+.step-card h3{font-family:'Fredoka One',cursive;font-size:1.4rem;margin:1rem 0 0.8rem;color:#1a1a2e;}
+.step-card p{color:#555;line-height:1.7;font-size:0.96rem;flex-grow:1;margin-bottom:1.4rem;}
+.step-card .btn{width:100%;text-align:center;justify-content:center;padding:1rem 1.4rem;font-size:0.98rem;margin-top:auto;}
+
+/* ══ EXCHANGES ══ */
+.exc-section{padding:3rem 0;background:#fff0f8;border-top:1px solid #ffe4f0;overflow:hidden;}
+@media(min-width:768px){.exc-section{padding:5.5rem 0;}}
+.exc-track img{height:32px;}
+@media(min-width:480px){.exc-track img{height:40px;}}
+@media(min-width:768px){.exc-track img{height:48px;}}
+@keyframes excScroll{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+
+/* ══ FOOTER ══ */
+footer{background:linear-gradient(160deg,#fff0f8,#fce7f4);padding:3.5rem 1.25rem 2.5rem;border-top:1px solid rgba(255,20,147,0.25);}
+@media(min-width:768px){footer{padding:5rem 1.5rem 3rem;}}
+.footer-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.8rem;margin-bottom:2.5rem;}
+@media(min-width:640px){.footer-grid{grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:3rem;margin-bottom:4rem;}}
+.footer-brand{grid-column:1/-1;}
+@media(min-width:640px){.footer-brand{grid-column:auto;}}
+.footer-h{font-family:'Fredoka One',cursive;color:var(--pink-deep);margin-bottom:0.9rem;font-size:0.95rem;}
+@media(min-width:640px){.footer-h{font-size:1.1rem;margin-bottom:1.4rem;}}
+.footer-links{display:flex;flex-direction:column;gap:8px;font-size:0.85rem;color:#5d3b72;}
+@media(min-width:640px){.footer-links{font-size:0.95rem;}}
+.footer-links a{text-decoration:none;}
+
+/* ══ SECTION HEADINGS ══ */
+.section-title{font-family:'Fredoka One',cursive;font-size:clamp(1.9rem,7vw,4.2rem);line-height:1.05;margin-bottom:0.8rem;}
+.section-sub{font-size:clamp(0.95rem,3vw,1.3rem);}
+
+/* ══ TOAST ══ */
+#toast{position:fixed;bottom:85px;left:50%;transform:translateX(-50%) translateY(16px);background:linear-gradient(135deg,var(--pink-deep),var(--purple));color:#fff;padding:11px 22px;border-radius:9999px;font-weight:700;font-size:0.88rem;box-shadow:0 10px 30px rgba(255,20,147,0.4);opacity:0;pointer-events:none;transition:opacity .3s,transform .3s;z-index:9999;white-space:nowrap;max-width:92vw;}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+/* ══ MUSIC PLAYER ══ */
+#music-player{position:fixed;bottom:14px;right:14px;z-index:998;background:rgba(255,255,255,0.96);border-radius:50px;padding:7px 13px;box-shadow:0 8px 24px rgba(255,20,147,0.25);display:flex;align-items:center;gap:8px;backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(255,105,180,0.3);max-width:calc(100vw - 28px);}
+@media(min-width:640px){#music-player{padding:10px 20px;gap:12px;right:25px;bottom:25px;}}
+.music-title{font-size:0.78rem;font-weight:700;color:var(--pink-deep);}
+@media(min-width:640px){.music-title{font-size:0.95rem;}}
+.music-sub{font-size:0.62rem;color:#888;}
+#musicBtn{background:linear-gradient(135deg,#FF1493,#A855F7);color:#fff;border:none;width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1rem;cursor:pointer;flex-shrink:0;box-shadow:0 4px 15px rgba(255,20,147,0.4);-webkit-tap-highlight-color:transparent;}
+@media(min-width:640px){#musicBtn{width:42px;height:42px;font-size:1.2rem;}}
+</style>
+</head>
+<body>
+
+<!-- ===================== NAVBAR ===================== -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="#hero" style="display:flex;align-items:center;gap:8px;text-decoration:none;flex-shrink:0;">
+      <img src="https://cdn.dexscreener.com/cms/images/eae611274d9cfdeac05eaab2356b2d0b6b212460917a93e49fdcda567c6c807f?width=64&height=64&fit=crop"
+           class="nav-logo-img" alt="$LABUBU" width="52" height="52">
+      <div>
+        <div class="nav-logo-name">$LABUBU</div>
+        <div class="nav-logo-sub">LabubuFans • Solana</div>
+      </div>
+    </a>
+
+    <div class="nav-desktop">
+      <a href="#generator" class="nav-link">⚽ FIFA Generator</a>
+      <a href="#votewc"    class="nav-link">🎯 Vote WC</a>
+      <a href="#news"      class="nav-link">📰 News</a>
+      <a href="#howtobuy"  class="nav-link">💎 How To Buy</a>
+    </div>
+
+    <div class="nav-actions">
+      <div class="nav-social">
+        <a href="https://x.com/labubufans" target="_blank" rel="noopener" aria-label="Twitter/X">
+          <img src="x.png" alt="X" width="38" height="38">
+        </a>
+        <a href="https://t.me/labubufan" target="_blank" rel="noopener" aria-label="Telegram">
+          <img src="tg.png" alt="Telegram" width="40" height="40">
+        </a>
+      </div>
+      <a href="https://jup.ag/?sell=So11111111111111111111111111111111111111112&buy=JB2wezZLdzWfnaCfHxLg193RS3Rh51ThiXxEDWQDpump"
+         target="_blank" rel="noopener" class="btn btn-primary nav-buy">🚀 BUY</a>
+      <button onclick="toggleNav()" class="hamburger" aria-label="Menu" aria-expanded="false" id="hamburgerBtn">
+        <span id="h1"></span><span id="h2"></span><span id="h3"></span>
+      </button>
+    </div>
+  </div>
+
+  <div id="mobile-menu" role="navigation" aria-label="Mobile navigation">
+    <a href="#generator" onclick="toggleNav()">⚽ FIFA Generator</a>
+    <a href="#votewc"    onclick="toggleNav()">🎯 Vote WC</a>
+    <a href="#news"      onclick="toggleNav()">📰 News</a>
+    <a href="#howtobuy"  onclick="toggleNav()">💎 How To Buy</a>
+    <div class="menu-socials">
+      <a href="https://x.com/labubufans" target="_blank" rel="noopener"><img src="x.png" alt="X"> Twitter</a>
+      <a href="https://t.me/labubufan"   target="_blank" rel="noopener"><img src="tg.png" alt="Tg"> Telegram</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ===================== TICKER ===================== -->
+<div id="ticker" role="marquee" aria-label="News ticker">
+  <div class="ticker-track">
+    🧸 $LABUBU — THE CUTEST MONSTER ON SOLANA &nbsp;•&nbsp; ⚽ FIFA WORLD CUP 2026 FAN TOKEN &nbsp;•&nbsp; COMMUNITY DRIVEN &nbsp;•&nbsp; TO THE MOON &nbsp;•&nbsp; CA: JB2wezZL...pump &nbsp;•&nbsp; 💎 0% TAX &nbsp;•&nbsp; 🚀 LIVE ON JUPITER &nbsp;&nbsp;
+    🧸 $LABUBU — THE CUTEST MONSTER ON SOLANA &nbsp;•&nbsp; ⚽ FIFA WORLD CUP 2026 FAN TOKEN &nbsp;•&nbsp; COMMUNITY DRIVEN &nbsp;•&nbsp; TO THE MOON &nbsp;•&nbsp; CA: JB2wezZL...pump &nbsp;•&nbsp; 💎 0% TAX &nbsp;•&nbsp; 🚀 LIVE ON JUPITER &nbsp;
+  </div>
+</div>
+
+<script>
+function initCountdown(){
+  const target=new Date('2026-06-11T20:00:00').getTime();
+  function update(){
+    const diff=target-Date.now(); if(diff<=0){clearInterval(iv);return;}
+    document.getElementById('cd-d').textContent=String(Math.floor(diff/86400000)).padStart(3,'0');
+    document.getElementById('cd-h').textContent=String(Math.floor((diff%86400000)/3600000)).padStart(2,'0');
+    document.getElementById('cd-m').textContent=String(Math.floor((diff%3600000)/60000)).padStart(2,'0');
+    document.getElementById('cd-s').textContent=String(Math.floor((diff%60000)/1000)).padStart(2,'0');
+  }
+  update(); const iv=setInterval(update,1000);
+}
+document.addEventListener('DOMContentLoaded',initCountdown);
+</script>
+
+<!-- ===================== HERO ===================== -->
+<section id="hero">
+  <div class="hero-inner">
+
+    <div class="hero-badge">🔥 OFFICIAL $LABUBU FAN HUB</div>
+
+    <h1 class="hero-h1">
+      <span class="grad-rainbow">LABUBU</span><br>
+      THE CUTEST MONSTER<br>
+      <span style="color:#222;">ON SOLANA</span>
+    </h1>
+
+    <p class="hero-sub">Fluffy vibes. Diamond hands. FIFA World Cup 2026 energy 🧸⚽</p>
+
+    <div class="hero-stats">
+      <div class="stat-card glass-strong">
+        <div class="stat-icon">🧸</div>
+        <div class="stat-value" style="color:var(--pink-deep);">1B</div>
+        <div class="stat-label">TOTAL SUPPLY</div>
+      </div>
+      <div class="stat-card glass-strong">
+        <div class="stat-icon">👥</div>
+        <div class="stat-value" style="color:var(--pink-deep);">18K+</div>
+        <div class="stat-label">HOLDERS</div>
+      </div>
+      <div class="stat-card glass-strong">
+        <div class="stat-icon">💎</div>
+        <div class="stat-value" style="color:#00AA5A;">0%</div>
+        <div class="stat-label">TAX / FEES</div>
+      </div>
+    </div>
+
+    <div class="hero-ctas">
+      <a href="https://jup.ag/?sell=So11111111111111111111111111111111111111112&buy=JB2wezZLdzWfnaCfHxLg193RS3Rh51ThiXxEDWQDpump"
+         target="_blank" rel="noopener" class="btn btn-hero" style="font-size:1.05rem;padding:15px 26px;">
+        🪙 BUY $LABUBU NOW
+      </a>
+      <a href="#generator" class="btn btn-hero" style="font-size:1.05rem;padding:15px 26px;">
+        ⚽ FIFA GENERATOR
+      </a>
+    </div>
+
+    <div class="countdown-wrap">
+      <p class="countdown-label">⚽ FIFA WORLD CUP 2026 STARTS IN ⚽</p>
+      <div class="countdown-row">
+        <div class="cd-card glass-strong"><div id="cd-d" class="cd-num" style="color:var(--pink-deep);">000</div><div class="cd-lbl" style="color:var(--pink-mid);">DAYS</div></div>
+        <div class="cd-card glass-strong"><div id="cd-h" class="cd-num" style="color:#0099DD;">00</div><div class="cd-lbl" style="color:#00B4FF;">HOURS</div></div>
+        <div class="cd-card glass-strong"><div id="cd-m" class="cd-num" style="color:var(--gold);">00</div><div class="cd-lbl" style="color:#FFBB33;">MINS</div></div>
+        <div class="cd-card glass-strong"><div id="cd-s" class="cd-num" style="color:var(--green);">00</div><div class="cd-lbl" style="color:#34D399;">SECS</div></div>
+      </div>
+    </div>
+
+    <div onclick="copyCA()" id="ca-box" class="ca-box glass-strong" role="button" aria-label="Copy contract address">
+      <span style="font-size:0.78rem;color:#888;font-weight:700;white-space:nowrap;">CA :</span>
+      <span id="ca-text" class="ca-addr">JB2wezZLdzWfnaCfHxLg193RS3Rh51ThiXxEDWQDpump</span>
+      <span id="ca-icon" aria-hidden="true" style="font-size:1.1rem;flex-shrink:0;">📋</span>
+    </div>
+  </div>
+
+  <!-- Hero Labubu image — desktop only -->
+  <div class="hero-img-wrap">
+    <div class="hero-img-circle">
+      <img src="https://cdn.dexscreener.com/cms/images/eae611274d9cfdeac05eaab2356b2d0b6b212460917a93e49fdcda567c6c807f?width=800&height=800"
+           alt="Labubu" loading="lazy">
+    </div>
+    <div class="hero-tag" style="top:6%;right:-18%;background:linear-gradient(135deg,#FFD700,#FF8C00);color:#000;transform:rotate(12deg);box-shadow:0 6px 20px rgba(255,140,0,0.45);">⚽ WC 2026</div>
+    <div class="hero-tag" style="bottom:4%;left:0%;background:linear-gradient(135deg,var(--pink-deep),var(--purple));color:#fff;transform:rotate(-6deg);box-shadow:0 6px 20px rgba(168,85,247,0.45);">$LABUBU 🚀</div>
+  </div>
+</section>
+
+<!-- ======================== FIFA GENERATOR ======================== -->
+<section id="generator">
+  <img src="fifa.png" alt="" aria-hidden="true" class="gen-deco"
+       style="position:absolute;left:-10%;top:15%;width:35%;z-index:0;transform:rotate(-7deg);opacity:0.8;" loading="lazy">
+  <img src="fifa.png" alt="" aria-hidden="true" class="gen-deco"
+       style="position:absolute;right:-10%;top:15%;width:35%;z-index:0;transform:rotate(7deg);opacity:0.8;" loading="lazy">
+
+  <div class="gen-inner">
+    <h2 class="section-title grad-rainbow">LABUBU FIFA GENERATOR 2026</h2>
+    <p style="color:#ff69b4;font-size:clamp(0.9rem,3vw,1.2rem);margin-bottom:2.5rem;">Choose your Labubu + Cap + Jersey + Accessories ⚽🧸</p>
+
+    <div id="preview-container">
+      <img id="labubu-body" src="labubu-red.png" alt="Labubu body" style="top:10%;left:15%;width:72%;z-index:1;">
+      <img id="jersey"      src="jersey_spain.png" alt="Jersey"    style="top:54%;left:24%;width:53%;z-index:2;">
+      <img id="cap"         src="cap.png" alt="Cap"                style="top:1%;left:25%;width:50%;z-index:3;transition:all .4s;">
+      <img id="crown"       src="crown.png" alt="Crown"            style="top:3%;left:23%;width:53%;z-index:3;display:none;transition:all .4s;">
+      <img id="sunglasses"  src="w1dgG.png" alt="Sunglasses"       style="top:31%;left:34%;width:33%;z-index:4;">
+      <img id="trophy"      src="trophy.png" alt="Trophy"          style="top:53%;left:62%;width:25%;transform:rotate(15deg);z-index:5;">
+      <img id="ball"        src="ball.png" alt="Ball"              style="top:75%;left:65%;width:23%;z-index:5;">
+      <img id="coca"        src="coca.png" alt="Coca"              style="top:62%;left:19%;width:17%;transform:rotate(-15deg);z-index:5;display:none;">
+      <img id="pill"        src="Pump-Fun-Logo.png" alt="Pump.fun" style="top:55%;left:15%;width:17%;z-index:5;display:none;">
+    </div>
+
+    <div class="pickers-grid">
+      <div class="picker-section"><p>🧸 Labubu Color</p><div id="color-picker" class="picker-row"></div></div>
+      <div class="picker-section"><p>🧢 Cap / Crown</p><div id="cap-picker" class="picker-row"></div></div>
+      <div class="picker-section"><p>👕 Jersey</p><div id="jersey-picker" class="picker-row"></div></div>
+      <div class="picker-section"><p>🎁 Accessories</p><div id="accessories-picker" class="picker-row"></div></div>
+    </div>
+
+    <div class="gen-btns">
+      <button onclick="randomizeLabubu()" class="btn btn-purple">🎲 Randomizer</button>
+      <button onclick="downloadCurrent()" class="btn btn-pink">⬇️ Download PNG</button>
+      <button onclick="postOnX()"         class="btn btn-ghost">𝕏 Post on X</button>
+    </div>
+  </div>
+</section>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" defer></script>
+<script>
+let currentColor='red';
+const colors=['red','pink','blue','green','purple','brown','grey','beige'];
+const caps=[{name:'Default Cap',src:'cap.png',isCrown:false},{name:'Binance Cap',src:'cap_binance.png',isCrown:false},{name:'Crown',src:'crown.png',isCrown:true}];
+const jerseys=[{name:'Spain',src:'jersey_spain.png'},{name:'France',src:'jersey_france.png'},{name:'Brazil',src:'jersey_brazil.png'},{name:'Argentina',src:'jersey_argentina.png'},{name:'Germany',src:'jersey_germany.png'},{name:'England',src:'jersey_england.png'},{name:'Senegal',src:'jersey_senegal.png'},{name:'Australia',src:'jersey_australia.png'},{name:'South Korea',src:'jersey_southkorea.png'},{name:'Japan',src:'jersey_japan.png'},{name:'USA',src:'jersey_usa.png'},{name:'Morocco',src:'jersey_morocco.png'},{name:'Mexico',src:'jersey_mexico.png'},{name:'Croatia',src:'jersey_croatia.png'},{name:'Netherlands',src:'jersey_netherlands.png'},{name:'Italy',src:'jersey_italy.png'},{name:'Portugal',src:'jersey_portugal.png'}];
+const accessoriesList=[{id:'sunglasses',src:'w1dgG.png',default:true},{id:'trophy',src:'trophy.png',default:false},{id:'ball',src:'ball.png',default:true},{id:'coca',src:'coca.png',default:false},{id:'pill',src:'Pump-Fun-Logo.png',default:false}];
+
+function applyCapChoice(cap){const c=document.getElementById('cap'),cr=document.getElementById('crown');if(cap.isCrown){c.style.display='none';cr.style.display='block';}else{c.style.display='block';cr.style.display='none';c.src=cap.src;}}
+function highlightBtn(container,active){container.querySelectorAll('button').forEach(b=>b.style.borderColor='#fff');active.style.borderColor='#FF1493';}
+
+function createColorPicker(){
+  const el=document.getElementById('color-picker');el.innerHTML='';
+  colors.forEach(col=>{const b=document.createElement('button');b.className='pick-color';b.style.cssText=`border-radius:50%;background:url(labubu-${col}.png) center/cover;border:3px solid #fff;box-shadow:0 4px 15px rgba(0,0,0,0.4);cursor:pointer;`;b.setAttribute('aria-label',col);b.onclick=()=>{currentColor=col;document.getElementById('labubu-body').src=`labubu-${col}.png`;highlightBtn(el,b);};el.appendChild(b);});
+}
+function createCapPicker(){
+  const el=document.getElementById('cap-picker');el.innerHTML='';
+  caps.forEach(cap=>{const b=document.createElement('button');b.className='pick-item';b.style.cssText=`background:url(${cap.src}) center/contain no-repeat;border:3px solid #fff;border-radius:10px;box-shadow:0 4px 15px rgba(0,0,0,0.4);cursor:pointer;`;b.title=cap.name;b.onclick=()=>{applyCapChoice(cap);highlightBtn(el,b);};el.appendChild(b);});
+}
+function createJerseyPicker(){
+  const el=document.getElementById('jersey-picker');el.innerHTML='';
+  jerseys.forEach(j=>{const b=document.createElement('button');b.className='pick-item';b.style.cssText=`background:url(${j.src}) center/contain no-repeat;border:3px solid #fff;border-radius:10px;box-shadow:0 4px 15px rgba(0,0,0,0.4);cursor:pointer;`;b.title=j.name;b.onclick=()=>{document.getElementById('jersey').src=j.src;highlightBtn(el,b);};el.appendChild(b);});
+}
+function createAccessoriesPicker(){
+  const el=document.getElementById('accessories-picker');el.innerHTML='';
+  accessoriesList.forEach(acc=>{const b=document.createElement('button');b.className='pick-item';b.style.cssText=`background:url(${acc.src}) center/contain no-repeat;border:3px solid #fff;border-radius:10px;box-shadow:0 4px 15px rgba(0,0,0,0.4);opacity:${acc.default?'1':'0.45'};cursor:pointer;`;b.title=acc.id;b.dataset.active=acc.default;b.onclick=()=>{const img=document.getElementById(acc.id);if(!img)return;const on=b.dataset.active==='true';img.style.display=on?'none':'block';b.dataset.active=!on;b.style.opacity=on?'0.45':'1';};el.appendChild(b);});
+}
+function randomizeLabubu(){
+  currentColor=colors[Math.floor(Math.random()*colors.length)];
+  document.getElementById('labubu-body').src=`labubu-${currentColor}.png`;
+  applyCapChoice(caps[Math.floor(Math.random()*caps.length)]);
+  document.getElementById('jersey').src=jerseys[Math.floor(Math.random()*jerseys.length)].src;
+  accessoriesList.forEach(acc=>{const i=document.getElementById(acc.id);if(i)i.style.display=Math.random()>.4?'block':'none';});
+}
+async function downloadCurrent(){
+  const c=document.getElementById('preview-container');if(!c)return;
+  try{const cv=await html2canvas(c,{scale:3,useCORS:true,backgroundColor:'#111'});cv.toBlob(blob=>{const u=URL.createObjectURL(blob),a=document.createElement('a');a.href=u;a.download=`labubu-fifa-${currentColor}.png`;a.click();URL.revokeObjectURL(u);showToast('✅ FIFA Card downloaded!');},'image/png');}catch(e){console.error(e);}
+}
+async function postOnX(){
+  await downloadCurrent();
+  window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent('My custom Labubu for FIFA World Cup 2026 is ready! 🔥 $LABUBU on Solana 🧸 #LABUBU')}`,'_blank');
+}
+document.addEventListener('DOMContentLoaded',()=>{createColorPicker();createCapPicker();createJerseyPicker();createAccessoriesPicker();});
+</script>
+
+<!-- ======================== WORLD CUP VOTING ======================== -->
+<section id="votewc">
+  <div style="max-width:1200px;margin:0 auto;">
+    <div style="text-align:center;margin-bottom:2.5rem;">
+      <h2 class="section-title grad-rainbow">PREDICT WORLD CUP 2026</h2>
+      <p class="section-sub" style="color:#ff69b4;">Vote for every match • Results update live</p>
+    </div>
+    <div id="matches-grid"></div>
+  </div>
+</section>
+
+<script>
+let MATCHES=[{id:'m1',date:'Jun 11',flag1:'🇺🇸',t1:'USA',flag2:'🇲🇽',t2:'Mexico',v1:52,v2:48},{id:'m2',date:'Jun 12',flag1:'🇫🇷',t1:'France',flag2:'🇳🇬',t2:'Nigeria',v1:68,v2:32},{id:'m3',date:'Jun 13',flag1:'🇧🇷',t1:'Brazil',flag2:'🇯🇵',t2:'Japan',v1:71,v2:29},{id:'m4',date:'Jun 14',flag1:'🇦🇷',t1:'Argentina',flag2:'🇲🇦',t2:'Morocco',v1:59,v2:41},{id:'m5',date:'Jun 15',flag1:'🇪🇸',t1:'Spain',flag2:'🇩🇪',t2:'Germany',v1:55,v2:45},{id:'m6',date:'Jun 16',flag1:'🇵🇹',t1:'Portugal',flag2:'🏴󠁧󠁢󠁥󠁮󠁧󠁿',t2:'England',v1:63,v2:37}];
+const votedSet=new Set();
+function buildMatches(){
+  const grid=document.getElementById('matches-grid');grid.innerHTML='';
+  MATCHES.forEach(m=>{
+    const hasVoted=votedSet.has(m.id);
+    const card=document.createElement('div');card.className=`match-card ${hasVoted?'voted':''}`;
+    card.innerHTML=`
+      <div style="text-align:center;margin-bottom:1rem;font-size:0.8rem;color:rgba(255,255,255,0.5);">⚽ ${m.date}</div>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.4rem;">
+        <div style="text-align:center;flex:1;"><div style="font-size:2.8rem;line-height:1;">${m.flag1}</div><div style="margin-top:6px;font-size:0.85rem;color:rgba(255,255,255,0.65);">${m.t1}</div></div>
+        <div style="font-size:1.1rem;color:rgba(255,255,255,0.25);padding:0 0.7rem;">VS</div>
+        <div style="text-align:center;flex:1;"><div style="font-size:2.8rem;line-height:1;">${m.flag2}</div><div style="margin-top:6px;font-size:0.85rem;color:rgba(255,255,255,0.65);">${m.t2}</div></div>
+      </div>
+      <div style="display:flex;justify-content:space-between;font-weight:700;margin-bottom:0.5rem;font-size:0.88rem;"><span style="color:#FF69B4;">${m.v1}%</span><span style="color:#C4B5FD;">${m.v2}%</span></div>
+      <div style="height:10px;background:rgba(255,255,255,0.1);border-radius:9999px;overflow:hidden;margin-bottom:1.3rem;"><div style="height:100%;width:${m.v1}%;background:linear-gradient(90deg,#FF1493,#FF69B4);transition:width .8s;"></div></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.7rem;">
+        <button onclick="wcVote('${m.id}',1)" ${hasVoted?'disabled':''} class="vote-btn" style="background:rgba(255,20,147,0.16);border:2px solid #FF1493;color:#FF69B4;">Vote ${m.flag1}</button>
+        <button onclick="wcVote('${m.id}',2)" ${hasVoted?'disabled':''} class="vote-btn" style="background:rgba(168,85,247,0.16);border:2px solid #A855F7;color:#C4B5FD;">Vote ${m.flag2}</button>
+      </div>
+      ${hasVoted?`<div style="text-align:center;margin-top:0.9rem;color:#4ADE80;font-weight:700;font-size:0.88rem;">✓ Vote recorded!</div>`:''}
+    `;
+    grid.appendChild(card);
+  });
+}
+window.wcVote=function(id,team){
+  if(votedSet.has(id))return;
+  const m=MATCHES.find(x=>x.id===id);if(!m)return;
+  votedSet.add(id);
+  if(team===1){m.v1=Math.min(98,m.v1+8);m.v2=Math.max(2,m.v2-8);}else{m.v2=Math.min(98,m.v2+8);m.v1=Math.max(2,m.v1-8);}
+  buildMatches();showToast('✅ Vote recorded!');
+};
+document.addEventListener('DOMContentLoaded',buildMatches);
+</script>
+
+<!-- ======================== NEWS CAROUSEL ======================== -->
+<section id="news">
+  <div style="max-width:1280px;margin:0 auto;">
+    <div style="text-align:center;margin-bottom:2.5rem;">
+      <h2 class="section-title grad-rainbow">LABUBU IN THE WILD</h2>
+      <p class="section-sub" style="color:#555;">The cutest monster is taking over the internet 🔥</p>
+    </div>
+    <div id="carousel-wrapper" style="overflow:hidden;position:relative;cursor:grab;">
+      <div id="news-carousel" style="display:flex;gap:1rem;will-change:transform;padding:10px 0;"></div>
+    </div>
+  </div>
+</section>
+
+<script>
+const posts=[
+  {user:'@okx',avatar:'https://pbs.twimg.com/profile_images/1968722816154345472/vEj4j3o9.jpg',img:'https://pbs.twimg.com/media/G92WTC2WsAAyi7l?format=jpg&name=small',text:"There's still time. All he wants is likes!",link:'https://x.com/okx/status/2007926283489943819'},
+  {user:'@yumeotakudayon',avatar:'https://pbs.twimg.com/profile_images/2036317439487848448/cHzFvpjR.jpg',img:'https://pbs.twimg.com/media/HIVHFCCaEAEksgW.jpg',text:'かわいい😭✨💛',link:'https://x.com/yumeotakudayon/status/2055126961467584559'},
+  {user:'@Bybit_Official',avatar:'https://pbs.twimg.com/profile_images/1894706611538530304/w9AEcEL8.jpg',img:'https://pbs.twimg.com/media/G46EUJ5WcAAq7zm?format=jpg&name=small',text:'Invest in your future.🔮',link:'https://x.com/Bybit_Official/status/1985769010785317351'},
+  {user:'@labubufans',avatar:'https://pbs.twimg.com/profile_images/1961012049544130560/ErOEz40W.jpg',img:'https://pbs.twimg.com/media/HIXTx9WWQAAynTQ.jpg',text:'GM 👀 My custom Labubu for FIFA World Cup 2026 is ready $LABUBU on Solana 🧸',link:'https://x.com/labubufans/status/2055281980699275510'},
+  {user:'@PSG_inside',avatar:'https://pbs.twimg.com/profile_images/2001647042842550272/pwc2Pxnp.jpg',img:'https://pbs.twimg.com/media/HIM8jkAWEAAQ6KK.jpg',text:'PSG x LABUBU — Special flocking on Night Edition jersey 🔥',link:'https://x.com/PSG_inside/status/2054553344920654098'},
+  {user:'@binancezh',avatar:'https://pbs.twimg.com/profile_images/1815972658640740354/RySOJZ_Q.jpg',img:'https://pbs.twimg.com/media/GsHKRlJaUAYZmpq?format=jpg&name=small',text:'Labubu showing off the Binance Dragon Boat Festival Polo shirt 👀',link:'https://x.com/binancezh/status/1928044874365882637'},
+  {user:'@deryaddincer',avatar:'https://pbs.twimg.com/profile_images/2044212864303673345/PgUeItlu.jpg',img:'https://pbs.twimg.com/media/HIM3BTPb0AAgKDC.jpg',text:'EDIT// APRILLIA 😂😂🥳🎉 LABUBU AUTO!!',link:'https://x.com/deryaddincer/status/2054546393860370904'},
+  {user:'@kasinglung',avatar:'https://pbs.twimg.com/profile_images/692009286298423296/HAj_7ifO.jpg',img:'https://pbs.twimg.com/media/HIBfRv1XIAAzU--?format=jpg&name=small',text:'THE MONSTERS GLOBAL TOUR・TOKYO is here 🔑',link:'https://x.com/kasinglung/status/2053746193776160977'},
+  {user:'@BusinessInsider',avatar:'https://pbs.twimg.com/profile_images/1724403357094141952/g5KVAmVz.jpg',img:'',text:'Pop Mart, the company behind Labubu, is now worth more than Mattel and Hasbro combined',link:'https://x.com/BusinessInsider/status/1994421029482156455'},
+  {user:'@ShangguanJiewen',avatar:'https://pbs.twimg.com/profile_images/1862376119275487232/2EUPstER.jpg',img:'https://pbs.twimg.com/media/G3WZcdUXAAAWxUF?format=jpg&name=small',text:'The Labubu Empire',link:'https://x.com/ShangguanJiewen/status/1987445062414823631'}
+];
+
+function buildCarousel(){
+  const track=document.getElementById('news-carousel');track.innerHTML='';
+  [...posts,...posts].forEach(post=>{
+    const card=document.createElement('div');card.className='news-card';
+    const img=post.img?`<img src="${post.img}" class="card-img" loading="lazy" alt="${post.user}">`:`<div style="height:170px;background:linear-gradient(135deg,#FF1493,#A855F7);display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.2rem;font-weight:700;">$LABUBU</div>`;
+    card.innerHTML=`${img}<div class="card-body"><div class="card-meta"><img src="${post.avatar}" class="card-avatar" loading="lazy" alt="${post.user}" onerror="this.style.display='none'"><div><div class="card-user">${post.user}</div><div class="card-platform">X • Labubu</div></div></div><p class="card-text">${post.text}</p><a href="${post.link}" target="_blank" rel="noopener" class="card-link">View on X →</a></div>`;
+    track.appendChild(card);
+  });
+}
+
+let scrollPos=0,isPaused=false,isDragging=false,dragStart=0,dragFrom=0;
+const SPEED=0.55;
+
+function scrollLoop(){
+  if(!isPaused&&!isDragging){
+    scrollPos-=SPEED;
+    const carousel=document.getElementById('news-carousel');
+    if(carousel){if(Math.abs(scrollPos)>=carousel.scrollWidth/2)scrollPos=0;carousel.style.transform=`translateX(${scrollPos}px)`;}
+  }
+  requestAnimationFrame(scrollLoop);
+}
+
+document.addEventListener('DOMContentLoaded',()=>{
+  buildCarousel();
+  const wrapper=document.getElementById('carousel-wrapper');
+  const carousel=document.getElementById('news-carousel');
+
+  wrapper.addEventListener('mouseenter',()=>isPaused=true);
+  wrapper.addEventListener('mouseleave',()=>isPaused=false);
+
+  // Touch drag support
+  wrapper.addEventListener('touchstart',e=>{isDragging=true;dragStart=e.touches[0].clientX;dragFrom=scrollPos;},{passive:true});
+  wrapper.addEventListener('touchmove',e=>{if(!isDragging)return;scrollPos=dragFrom-(e.touches[0].clientX-dragStart);carousel.style.transform=`translateX(${scrollPos}px)`;},{passive:true});
+  wrapper.addEventListener('touchend',()=>isDragging=false);
+
+  requestAnimationFrame(scrollLoop);
+});
+</script>
+
+<!-- ======================== HOW TO BUY ======================== -->
+<section id="howtobuy" class="htb-section">
+  <div class="htb-inner">
+    <h2 class="section-title grad-rainbow">How To Buy $LABUBU</h2>
+    <p class="htb-subtitle">Even if it's your first time on Solana — super simple</p>
+    <div class="htb-grid">
+      <div class="step-card">
+        <div class="step-badge">1</div>
+        <div class="step-icon">👛</div>
+        <h3>Get Some SOL</h3>
+        <p>Buy SOL on Binance, Coinbase or Kraken, or directly inside Phantom Wallet.</p>
+        <a href="https://phantom.app/" target="_blank" rel="noopener" class="btn btn-primary">Download Phantom →</a>
+      </div>
+      <div class="step-card">
+        <div class="step-badge">2</div>
+        <div class="step-icon">🔄</div>
+        <h3>Swap on Jupiter</h3>
+        <p>Connect your wallet and swap SOL for $LABUBU instantly with zero hassle.</p>
+        <a href="https://jup.ag/?sell=So11111111111111111111111111111111111111112&buy=JB2wezZLdzWfnaCfHxLg193RS3Rh51ThiXxEDWQDpump"
+           target="_blank" rel="noopener" class="btn btn-primary">BUY on Jupiter →</a>
+      </div>
+      <div class="step-card">
+        <div class="step-badge">3</div>
+        <div class="step-icon">🎉</div>
+        <h3>Hold & Join the Fun</h3>
+        <p>Add $LABUBU to your wallet and join the community for updates & good vibes.</p>
+        <a href="https://t.me/labubufan" target="_blank" rel="noopener" class="btn btn-outline">Join Telegram →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================== EXCHANGES ======================== -->
+<section class="exc-section">
+  <div style="text-align:center;padding:0 1.25rem;margin-bottom:2rem;">
+    <h2 class="section-title grad-rainbow">We're Listed ON</h2>
+    <p style="font-size:1rem;color:#444;font-weight:600;margin-top:0.5rem;">Major exchanges supporting $LABUBU</p>
+  </div>
+  <div style="overflow:hidden;padding:6px 0;">
+    <div class="exc-track" style="display:flex;gap:2.2rem;width:max-content;animation:excScroll 28s linear infinite;align-items:center;padding:0 1rem;">
+      <img src="gate.png"      alt="Gate.io"   loading="lazy">
+      <img src="bitget.png"    alt="Bitget"    loading="lazy">
+      <img src="lbank.png"     alt="LBank"     loading="lazy">
+      <img src="weex.png"      alt="Weex"      loading="lazy">
+      <img src="biconomy.png"  alt="Biconomy"  loading="lazy">
+      <img src="coinw.png"     alt="CoinW"     loading="lazy">
+      <img src="digifinex.png" alt="DigiFinex" loading="lazy">
+      <img src="coinex.png"    alt="CoinEx"    loading="lazy">
+      <img src="poloniex.png"  alt="Poloniex"  loading="lazy">
+      <img src="indodax.png"   alt="Indodax"   loading="lazy">
+      <img src="gate.png"      alt="" aria-hidden="true" loading="lazy">
+      <img src="bitget.png"    alt="" aria-hidden="true" loading="lazy">
+      <img src="lbank.png"     alt="" aria-hidden="true" loading="lazy">
+      <img src="weex.png"      alt="" aria-hidden="true" loading="lazy">
+      <img src="biconomy.png"  alt="" aria-hidden="true" loading="lazy">
+      <img src="coinw.png"     alt="" aria-hidden="true" loading="lazy">
+      <img src="digifinex.png" alt="" aria-hidden="true" loading="lazy">
+      <img src="coinex.png"    alt="" aria-hidden="true" loading="lazy">
+      <img src="poloniex.png"  alt="" aria-hidden="true" loading="lazy">
+      <img src="indodax.png"   alt="" aria-hidden="true" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<!-- ======================== FOOTER ======================== -->
+<footer>
+  <div style="max-width:1200px;margin:0 auto;">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#hero" style="display:inline-flex;align-items:center;gap:10px;margin-bottom:1rem;text-decoration:none;">
+          <img src="https://cdn.dexscreener.com/cms/images/eae611274d9cfdeac05eaab2356b2d0b6b212460917a93e49fdcda567c6c807f?width=64&height=64&fit=crop&quality=95&format=auto"
+               width="56" height="56" style="border-radius:50%;border:3px solid #fff;box-shadow:0 0 16px rgba(255,20,147,.4);" alt="$LABUBU">
+          <div>
+            <div style="font-family:'Fredoka One',cursive;font-size:1.7rem;color:var(--pink-deep);line-height:1;">$LABUBU</div>
+            <div style="font-size:0.78rem;color:#c026d3;font-weight:700;">LabubuFans • Solana</div>
+          </div>
+        </a>
+        <p style="color:#6b4c7a;line-height:1.7;max-width:280px;font-size:0.88rem;">Unofficial fan hub for the cutest monster on Solana.<br>Community-driven. Always bullish. 🚀</p>
+      </div>
+      <div>
+        <h4 class="footer-h">NAVIGATE</h4>
+        <div class="footer-links">
+          <a href="#hero">🏠 Home</a><a href="#generator">⚽ FIFA Generator</a>
+          <a href="#votewc">🎯 Vote WC</a><a href="#news">📰 News</a><a href="#howtobuy">💎 How To Buy</a>
+        </div>
+      </div>
+      <div>
+        <h4 class="footer-h">COMMUNITY</h4>
+        <div class="footer-links">
+          <a href="https://twitter.com/labubufans" target="_blank" rel="noopener">𝕏 Twitter</a>
+          <a href="https://t.me/labubufan" target="_blank" rel="noopener">📱 Telegram</a>
+        </div>
+      </div>
+      <div>
+        <h4 class="footer-h">BUY $LABUBU</h4>
+        <div class="footer-links">
+          <a href="https://jup.ag/?sell=So11111111111111111111111111111111111111112&buy=JB2wezZLdzWfnaCfHxLg193RS3Rh51ThiXxEDWQDpump" target="_blank" rel="noopener">Jupiter</a>
+          <a href="https://pump.fun" target="_blank" rel="noopener">Pump.fun</a>
+          <a href="https://dexscreener.com/solana/JB2wezZLdzWfnaCfHxLg193RS3Rh51ThiXxEDWQDpump" target="_blank" rel="noopener">DexScreener</a>
+        </div>
+      </div>
+    </div>
+
+    <div style="background:rgba(255,255,255,0.75);backdrop-filter:blur(12px);border:1px solid rgba(255,20,147,0.2);border-radius:14px;padding:1.3rem 1.2rem;text-align:center;margin:0 auto 1.8rem;color:#7a4d8a;font-size:0.82rem;line-height:1.65;">
+      <strong style="color:var(--pink-deep);">DISCLAIMER</strong><br><br>
+      This meme coin is not affiliated with, endorsed by, or associated with Popmart, Kasing Lung, or any official representatives of the Labubu brand. It is purely a fan token and a community experiment. Please do your own research before participating. Meme coins are highly speculative and volatile assets with no intrinsic value.
+    </div>
+
+    <div style="text-align:center;color:#a07ab5;font-size:0.8rem;">
+      © 2026 LabubuFans • Unofficial Fan Site • Not Financial Advice<br>
+      CA: <button onclick="navigator.clipboard.writeText('JB2wezZLdzWfnaCfHxLg193RS3Rh51ThiXxEDWQDpump').then(()=>showToast('📋 CA Copied!'))"
+            style="cursor:pointer;font-family:monospace;background:rgba(255,20,147,0.1);color:var(--pink-deep);border:none;padding:2px 8px;border-radius:6px;font-size:inherit;">
+        JB2wezZL...pump
+      </button>
+    </div>
+  </div>
+</footer>
+
+<!-- ======================== TOAST ======================== -->
+<div id="toast" role="status" aria-live="polite"></div>
+
+<!-- ======================== MUSIC PLAYER ======================== -->
+<div id="music-player">
+  <span style="font-size:1.2rem;" aria-hidden="true">🎵</span>
+  <audio id="labubuMusic" loop><source src="labubu-theme.mp3" type="audio/mpeg"></audio>
+  <button id="musicBtn" onclick="toggleMusic()" aria-label="Play / Pause music">▶️</button>
+  <div>
+    <div class="music-title">Labubu The OG</div>
+    <div class="music-sub">Now Playing</div>
+  </div>
+</div>
+
+<!-- ======================== GLOBAL SCRIPTS ======================== -->
+<script>
+// Toast
+let toastTimer;
+function showToast(msg){
+  const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');
+  clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove('show'),3000);
+}
+
+// Copy CA
+function copyCA(){
+  navigator.clipboard.writeText('JB2wezZLdzWfnaCfHxLg193RS3Rh51ThiXxEDWQDpump').then(()=>{
+    document.getElementById('ca-icon').textContent='✅';
+    showToast('📋 Contract address copied!');
+    setTimeout(()=>document.getElementById('ca-icon').textContent='📋',2000);
+  });
+}
+
+// Mobile nav
+let navOpen=false;
+function toggleNav(){
+  navOpen=!navOpen;
+  document.getElementById('mobile-menu').classList.toggle('open',navOpen);
+  document.getElementById('hamburgerBtn').setAttribute('aria-expanded',navOpen);
+  const h1=document.getElementById('h1'),h2=document.getElementById('h2'),h3=document.getElementById('h3');
+  if(navOpen){h1.style.transform='rotate(45deg) translate(5px,5px)';h2.style.opacity='0';h3.style.transform='rotate(-45deg) translate(5px,-5px)';}
+  else{h1.style.transform=h3.style.transform='';h2.style.opacity='1';}
+}
+document.addEventListener('click',e=>{
+  if(navOpen&&!document.getElementById('navbar').contains(e.target))toggleNav();
+});
+
+// Music
+let isPlaying=false;
+document.addEventListener('DOMContentLoaded',()=>{const a=document.getElementById('labubuMusic');if(a)a.volume=0.35;});
+function toggleMusic(){
+  const audio=document.getElementById('labubuMusic'),btn=document.getElementById('musicBtn');
+  if(isPlaying){audio.pause();btn.textContent='▶️';}else{audio.play().catch(()=>{});btn.textContent='⏸️';}
+  isPlaying=!isPlaying;
+}
+
+// Floaters — fewer on mobile
+function spawnFloaters(sectionId){
+  const section=document.getElementById(sectionId);if(!section)return;
+  let container=section.querySelector('.floater-container');
+  if(!container){container=document.createElement('div');container.className='floater-container';Object.assign(container.style,{position:'absolute',inset:'0',pointerEvents:'none',zIndex:'0',overflow:'hidden'});section.style.position='relative';section.insertBefore(container,section.firstChild);}
+  const items=['🧸','❤️','⭐','🐾','💫','🎀','🌸','♥','🍭','🌟'];
+  const count=window.innerWidth<640?8:16;
+  for(let i=0;i<count;i++){
+    const el=document.createElement('div');el.className='bg-floater';
+    el.style.left=Math.random()*100+'%';el.style.fontSize=(1+Math.random()*1.8)+'rem';
+    el.style.animationDuration=(18+Math.random()*26)+'s';el.style.animationDelay='-'+(Math.random()*35)+'s';
+    el.textContent=items[Math.floor(Math.random()*items.length)];el.setAttribute('aria-hidden','true');
+    container.appendChild(el);
+  }
+}
+document.addEventListener('DOMContentLoaded',()=>{spawnFloaters('hero');spawnFloaters('news');spawnFloaters('howtobuy');});
+</script>
+</body>
+</html>
