@@ -686,13 +686,13 @@ window.wcVote = async function(id, team) {
 
   if (error) {
     console.error('Erreur Supabase:', error);
-    votedSet.delete(id); // réautoriser le vote si l'insert a échoué
+    votedSet.delete(id); 
     renderMatches();
     if (typeof showToast === 'function') showToast('❌ Erreur, réessaie');
     return;
   }
 
-  // Mise à jour visuelle locale (le vrai % sera recalculé via loadVotes)
+ 
   if (team === 1) {
     m.v1 = Math.min(96, m.v1 + 6);
     m.v2 = Math.max(4, m.v2 - 6);
@@ -704,7 +704,7 @@ window.wcVote = async function(id, team) {
   if (typeof showToast === 'function') showToast('✅ Vote recorded!');
 };
 
-// Charge les vrais résultats depuis Supabase au démarrage
+
 async function loadVotes() {
   try {
     const { data, error } = await sb.from('votes').select('match_id, vote');
