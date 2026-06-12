@@ -723,14 +723,15 @@ async function loadVotes() {
   }
 }
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
   const datePicker = document.getElementById('date-picker');
   const matchesGrid = document.getElementById('matches-grid');
 
   if (datePicker && matchesGrid) {
     renderDatePicker();
-    renderMatches();
-    loadVotes();
+    renderMatches();        
+    await loadVotes();      
+    renderMatches();        
   }
 });
 </script>
