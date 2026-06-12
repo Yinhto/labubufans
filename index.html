@@ -681,7 +681,7 @@ window.wcVote = function(id, team) {
     m.v1 = Math.max(4, m.v1 - 6);
   }
   renderMatches();
-  showToast('✅ Vote recorded!');
+  if (typeof showToast === 'function') showToast('✅ Vote recorded!');
 };
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -691,12 +691,9 @@ document.addEventListener('DOMContentLoaded', () => {
   if (datePicker && matchesGrid) {
     renderDatePicker();
     renderMatches();
-  } else {
-    console.error('Voting section elements not found');
   }
 });
 </script>
-
 <!-- ======================== NEWS CAROUSEL ======================== -->
 <section id="news">
   <div style="max-width:1280px;margin:0 auto;">
