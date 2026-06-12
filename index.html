@@ -281,6 +281,7 @@ footer{background:linear-gradient(160deg,#fff0f8,#fce7f4);padding:3.5rem 1.25rem
 #musicBtn{background:linear-gradient(135deg,#FF1493,#A855F7);color:#fff;border:none;width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1rem;cursor:pointer;flex-shrink:0;box-shadow:0 4px 15px rgba(255,20,147,0.4);-webkit-tap-highlight-color:transparent;}
 @media(min-width:640px){#musicBtn{width:42px;height:42px;font-size:1.2rem;}}
 </style>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
 
@@ -561,6 +562,12 @@ document.addEventListener('DOMContentLoaded',()=>{createColorPicker();createCapP
 </section>
 
 <script>
+// ==================== SUPABASE ====================
+// ⚠️ Remplace ces 2 valeurs par celles de ton projet (Supabase → Settings → API)
+const SUPABASE_URL = 'https://TON-PROJET.supabase.co';
+const SUPABASE_ANON_KEY = 'TA-CLE-ANON-PUBLIQUE';
+const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
 // ==================== DATA ====================
 const ALL_MATCHES = [
   { id:'m1', date:'2026-06-11', flag1:'🇲🇽', t1:'Mexico', flag2:'🇿🇦', t2:'South Africa', v1:64, v2:36 },
@@ -667,12 +674,26 @@ function renderMatches() {
   });
 }
 
-window.wcVote = function(id, team) {
+window.wcVote = async function(id, team) {
   if (votedSet.has(id)) return;
   const m = ALL_MATCHES.find(x => x.id === id);
   if (!m) return;
 
+  // Bloquer immédiatement pour éviter les doubles clics
   votedSet.add(id);
+  renderMatches();
+
+  const { error } = await sb.from('votes').insert({ match_id: id, vote: team });
+
+  if (error) {
+    console.error('Erreur Supabase:', error);
+    votedSet.delete(id); // réautoriser le vote si l'insert a échoué
+    renderMatches();
+    if (typeof showToast === 'function') showToast('❌ Erreur, réessaie');
+    return;
+  }
+
+  // Mise à jour visuelle locale (le vrai % sera recalculé via loadVotes)
   if (team === 1) {
     m.v1 = Math.min(96, m.v1 + 6);
     m.v2 = Math.max(4, m.v2 - 6);
@@ -684,6 +705,25 @@ window.wcVote = function(id, team) {
   if (typeof showToast === 'function') showToast('✅ Vote recorded!');
 };
 
+// Charge les vrais résultats depuis Supabase au démarrage
+async function loadVotes() {
+  try {
+    const { data, error } = await sb.from('votes').select('match_id, vote');
+    if (error || !data || data.length === 0) return;
+
+    ALL_MATCHES.forEach(m => {
+      const rows = data.filter(r => r.match_id === m.id);
+      if (rows.length === 0) return;
+      const c1 = rows.filter(r => r.vote === 1).length;
+      m.v1 = Math.round((c1 / rows.length) * 100);
+      m.v2 = 100 - m.v1;
+    });
+    renderMatches();
+  } catch (e) {
+    console.error('loadVotes:', e);
+  }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   const datePicker = document.getElementById('date-picker');
   const matchesGrid = document.getElementById('matches-grid');
@@ -691,6 +731,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (datePicker && matchesGrid) {
     renderDatePicker();
     renderMatches();
+    loadVotes();
   }
 });
 </script>
